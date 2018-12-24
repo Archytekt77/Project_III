@@ -18,17 +18,17 @@ public class Mastermind extends Games{
 
 	@Override
 	protected int challengerMode() {
-		return 0;
+		return 4;
 	}
 
 	@Override
 	protected int defenderMode() {
-		return 0;
+		return 5;
 	}
 
 	@Override
 	protected int duelMode() {
-		return 0;
+		return 6;
 	}
 
 	@Override

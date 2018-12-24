@@ -29,10 +29,10 @@ public class StrategyGamesGetPropertyValues {
 
 			// get the property value and print it out
 			String size = prop.getProperty("size");
-			String turn = prop.getProperty("turn");
+			String finalTurn = prop.getProperty("finalTurn");
 			String color = prop.getProperty("couleur");
 
-			result = "Propriété du jeu = " + size + " taille, " + turn + " tours, " + color + " couleurs";
+			result = "Propriété du jeu = " + size + " taille, " + finalTurn + " tours, " + color + " couleurs";
 			System.out.println(result + "\nProgram Ran on " + time);
 		} catch (Exception e) {
 			System.out.println("Exception: " + e);

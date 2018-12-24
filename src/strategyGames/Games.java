@@ -21,7 +21,7 @@ public abstract class Games {
 
 	abstract protected int challengerMode();
 
-	abstract protected int defenderMode(); // faire un algo
+	abstract protected int defenderMode();
 
 	abstract protected int duelMode();
 
