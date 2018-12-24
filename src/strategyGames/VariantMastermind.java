@@ -5,8 +5,7 @@ import java.util.Scanner;
 
 public class VariantMastermind extends Games {
 
-	private int[] computerTable;
-	private int[] humanTable;
+	private int[] secretTable;
 	private int[] answerTable;
 	private int size;
 	private int turn;
@@ -30,17 +29,17 @@ public class VariantMastermind extends Games {
 	 */
 	public int[] createHumanTable() {
 		try {
-			humanTable = new int[size];
+			secretTable = new int[size];
 			System.out.print("Veuillez taper votre combinaison secrète :");
 			String answer = sc.nextLine();
-			humanTable = verifyStringIntegrity(answer);
-			if (humanTable == null) {
+			secretTable = verifyStringIntegrity(answer);
+			if (secretTable == null) {
 				createHumanTable();
 			}
 		} catch (Exception e) {
 
 		}
-		return humanTable;
+		return secretTable;
 	}
 
 	/**
@@ -50,12 +49,12 @@ public class VariantMastermind extends Games {
 	 */
 
 	public int[] createComputerTable() {
-		computerTable = new int[size];
+		secretTable = new int[size];
 
-		for (int i = 0; i < computerTable.length; i++) {
-			computerTable[i] = (int) (Math.random() * (10));
+		for (int i = 0; i < secretTable.length; i++) {
+			secretTable[i] = (int) (Math.random() * (10));
 		}
-		return computerTable;
+		return secretTable;
 	}
 
 	/**
@@ -100,15 +99,15 @@ public class VariantMastermind extends Games {
 	@Override
 	protected int challengerMode() {
 		int i;
+		String response;
 
 		createComputerTable();
-
+		
 		for (i = 0; i < turn; i++) {
-			String response = computerTableCheck(answerTable);
+			response = secretTableCheck(answerTable);
 			System.out.println(response);
-			if (answerTable.toString().equals(computerTable.toString())) {
+			if (answerTable.toString().equals(secretTable.toString())) {
 				System.out.println("bravo");
-				break;
 			}
 		}
 
@@ -120,7 +119,7 @@ public class VariantMastermind extends Games {
 		createHumanTable();
 
 		for (int i = 0; i < turn; i++) {
-			System.out.print(computerTableCheck(answerTable()));
+			System.out.print(secretTableCheck(answerTable()));
 		}
 		return 0;
 	}
@@ -132,15 +131,15 @@ public class VariantMastermind extends Games {
 	}
 
 	@Override
-	protected String computerTableCheck(int tab[]) {
+	protected String secretTableCheck(int tab[]) {
 		String ret = "";
 
-		for (int i = 0; i < computerTable.length; i++) {
-			if (computerTable[i] == tab[i]) {
+		for (int i = 0; i < secretTable.length; i++) {
+			if (secretTable[i] == tab[i]) {
 				ret += "=";
-			} else if (computerTable[i] > tab[i]) {
+			} else if (secretTable[i] > tab[i]) {
 				ret += "+";
-			} else if (computerTable[i] < tab[i]) {
+			} else if (secretTable[i] < tab[i]) {
 				ret += "-";
 			}
 		}

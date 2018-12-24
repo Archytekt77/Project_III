@@ -25,10 +25,10 @@ public abstract class Games {
 
 	abstract protected int duelMode();
 
-	abstract protected String computerTableCheck(int tab[]);
+	abstract protected String secretTableCheck(int tab[]);
 	
-	public void selectGameMode() {
-		//int ret;
+	public int selectGameMode() {
+		int ret;
 		int gameMode = 0;
 		
 		try {
@@ -36,14 +36,11 @@ public abstract class Games {
 			gameMode = sc.nextInt();
 			
 			if (gameMode == 1)
-				challengerMode();
-				//ret = challengerMode();
+				ret = challengerMode();
 			else if (gameMode == 2)
-				defenderMode();
-				//ret = defenderMode();
+				ret = defenderMode();
 			else if (gameMode == 3)
-				duelMode();
-				//ret = duelMode();
+				ret = duelMode();
 			else {
 				sc = new Scanner(System.in);
 				throw new InputMismatchException();
@@ -51,6 +48,7 @@ public abstract class Games {
 		} catch (InputMismatchException e) {
 			selectGameMode();
 		}
+		return 0;
 	}
 
 	/**

@@ -32,7 +32,7 @@ public class Mastermind extends Games{
 	}
 
 	@Override
-	protected String computerTableCheck(int[] tab) {
+	protected String secretTableCheck(int[] tab) {
 		// TODO Auto-generated method stub
 		return null;
 	}
