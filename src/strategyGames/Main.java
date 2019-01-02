@@ -8,18 +8,18 @@ import config.StrategyGamesGetPropertyValues;
 public class Main {
 
 	static Scanner sc = new Scanner(System.in);
+	static Games game = null;
 
 	public static void main(String[] args) {
-
-		StrategyGamesGetPropertyValues properties = new StrategyGamesGetPropertyValues();
+		StrategyGamesGetPropertyValues properties = null;
 		try {
-		properties.getPropValues();
-		}catch (Exception e) {
-			
-		}
-		Games game;
+			properties = new StrategyGamesGetPropertyValues();
+			properties.getPropValues();
+		} catch (Exception e) {
 
-		game = selectGame();
+		}
+
+		game = selectGame(properties);
 		game.selectGameMode();
 
 		restart();
@@ -54,7 +54,7 @@ public class Main {
 		}
 	}
 
-	public static Games selectGame() {
+	public static Games selectGame(StrategyGamesGetPropertyValues properties) {
 		int select = 0;
 
 		try {
@@ -62,15 +62,15 @@ public class Main {
 			select = sc.nextInt();
 
 			if (select == 1)
-				return new VariantMastermind();
+				return new VariantMastermind(properties);
 			else if (select == 2)
-				return new Mastermind();
+				return new Mastermind(properties);
 			else {
 				sc = new Scanner(System.in);
 				throw new InputMismatchException();
 			}
 		} catch (InputMismatchException e) {
-			return selectGame();
+			return selectGame(properties);
 		}
 	}
 }

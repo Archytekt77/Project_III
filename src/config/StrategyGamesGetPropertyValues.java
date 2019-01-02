@@ -8,8 +8,11 @@ import java.util.Properties;
 
 public class StrategyGamesGetPropertyValues {
 
-	String result = "";
-	InputStream inputStream;
+	private String result = "";
+	private InputStream inputStream;
+	private String size;
+	private String finalTurn;
+	private String color;
 
 	public String getPropValues() throws IOException {
 
@@ -28,9 +31,9 @@ public class StrategyGamesGetPropertyValues {
 			Date time = new Date(System.currentTimeMillis());
 
 			// get the property value and print it out
-			String size = prop.getProperty("size");
-			String finalTurn = prop.getProperty("finalTurn");
-			String color = prop.getProperty("couleur");
+			size = prop.getProperty("size");
+			finalTurn = prop.getProperty("finalTurn");
+			color = prop.getProperty("couleur");
 
 			result = "Propriété du jeu = " + size + " taille, " + finalTurn + " tours, " + color + " couleurs";
 			System.out.println(result + "\nProgram Ran on " + time);
@@ -40,6 +43,18 @@ public class StrategyGamesGetPropertyValues {
 			inputStream.close();
 		}
 		return result;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public String getFinalTurn() {
+		return finalTurn;
+	}
+
+	public String getColor() {
+		return color;
 	}
 
 }
