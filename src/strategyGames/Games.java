@@ -4,46 +4,52 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import config.StrategyGamesGetPropertyValues;
 
-
 public abstract class Games {
 
 	public Scanner sc = new Scanner(System.in);
 	protected StrategyGamesGetPropertyValues prop;
 	protected int size;
 	protected int finalTurn;
-	protected int[] secretTable;
+	protected int minNumber;
+	protected int maxNumber;
+	protected int[] secretComputerTable;
 	protected int[] answerComputerTable;
-	protected int[] answerTable;
-	
+	protected int[] secretHumanTable;
+	protected int[] answerHumanTable;
+
 	public Games() {
-		
+
 	}
-	
+
 	public Games(StrategyGamesGetPropertyValues prop) {
 		this.prop = prop;
 		size = Integer.parseInt(prop.getSize());
 		finalTurn = Integer.parseInt(prop.getFinalTurn());
+		minNumber = Integer.parseInt(prop.getMinNumber());
+		maxNumber = Integer.parseInt(prop.getMaxNumber());
 		sc = new Scanner(System.in);
 	}
-	
+
 	abstract protected int challengerMode();
 
 	abstract protected int defenderMode();
 
 	abstract protected int duelMode();
-	
+
 	abstract protected int[] computerAlgo(String s);
 
-	abstract protected String secretTableCheck(int tab[]);
-	
+	abstract protected String secretComputerTableCheck(int tab[]);
+
+	abstract protected String secretHumanTableCheck(int tab[]);
+
 	public int selectGameMode() {
 		int ret = 0;
 		int gameMode = 0;
-		
+
 		try {
 			System.out.println("1: Mode Challenger; 2: Mode defenseur; 3: Mode duel");
 			gameMode = sc.nextInt();
-			
+
 			if (gameMode == 1)
 				ret = challengerMode();
 			else if (gameMode == 2)
@@ -59,33 +65,43 @@ public abstract class Games {
 		}
 		return ret;
 	}
-	
-	protected int[] createComputerTable() {
-		secretTable = new int[size];
 
-		for (int i = 0; i < secretTable.length; i++) {
-			secretTable[i] = (int) (Math.random() * (10));
-		}
-		return secretTable;
+	public int selectGameMode(int game) {
+		if (game == 1)
+			return challengerMode();
+		else if (game == 2)
+			return defenderMode();
+		else
+			return duelMode();
 	}
-	
+
+	protected int[] createComputerTable() {
+		secretComputerTable = new int[size];
+
+		for (int i = 0; i < secretComputerTable.length; i++) {
+			secretComputerTable[i] = minNumber + (int) (Math.random() * ((maxNumber - minNumber)+ 1));
+		}
+		return secretComputerTable;
+	}
+
 	protected int[] createHumanTable() {
 		String answer = "";
+		sc = new Scanner(System.in);
 
 		try {
-			secretTable = new int[size];
+			secretHumanTable = new int[size];
 			System.out.println("Veuillez taper votre combinaison secrète :");
 			answer = sc.nextLine();
-			secretTable = verifyStringIntegrity(answer);
-			if (secretTable == null) {
+			secretHumanTable = verifyStringIntegrity(answer);
+			if (secretHumanTable == null) {
 				createHumanTable();
 			}
 		} catch (Exception e) {
 
 		}
-		return secretTable;
+		return secretHumanTable;
 	}
-	
+
 	protected int[] firstDefaultComputerResponse() {
 		answerComputerTable = new int[size];
 
@@ -94,17 +110,17 @@ public abstract class Games {
 		}
 		return answerComputerTable;
 	}
-	
-	protected int[] answerHumanTable() {
+
+	protected int[] createAnswerHumanTable() {
 		String answer = sc.nextLine();
 
-		answerTable = verifyStringIntegrity(answer);
-		if (answerTable == null)
-			return answerHumanTable();
+		answerHumanTable = verifyStringIntegrity(answer);
+		if (answerHumanTable == null)
+			return createAnswerHumanTable();
 
-		return answerTable;
+		return answerHumanTable;
 	}
-	
+
 	protected int[] verifyStringIntegrity(String s) {
 		int tab[] = new int[size];
 
@@ -121,7 +137,7 @@ public abstract class Games {
 		}
 		return tab;
 	}
-	
+
 	protected void printTab(int tab[]) {
 		for (int i = 0; i < tab.length; i++) {
 			System.out.print(tab[i]);

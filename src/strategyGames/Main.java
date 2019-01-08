@@ -20,14 +20,13 @@ public class Main {
 		}
 
 		game = selectGame(properties);
-		game.selectGameMode();
 
-		restart();
+		restart(game.selectGameMode(), game);
 		sc.close();
 
 	}
 
-	public static void restart() {
+	public static void restart(int gameSelect, Games game) {
 		int question = 0;
 
 		try {
@@ -36,11 +35,12 @@ public class Main {
 
 			switch (question) {
 			case 1:
-				System.out.println(
-						"---------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 				System.out.println("NOUVELLE PARTIE");
+				restart(game.selectGameMode(gameSelect), game);
+				break;
 			case 2:
 				main(null);
+				break;
 			case 3:
 				System.out.println("Au revoir !");
 				System.exit(0);
@@ -50,7 +50,7 @@ public class Main {
 				throw new InputMismatchException();
 			}
 		} catch (InputMismatchException e) {
-			restart();
+			restart(gameSelect, game);
 		}
 	}
 

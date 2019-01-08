@@ -4,17 +4,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 import config.StrategyGamesGetPropertyValues;
 
+public class Mastermind extends Games {
 
-public class Mastermind extends Games{
-	
 	public Mastermind() {
-		
+
 	}
-	
+
 	public Mastermind(StrategyGamesGetPropertyValues prop) {
 		super(prop);
 		sc = new Scanner(System.in);
-		
+
 	}
 
 	@Override
@@ -23,16 +22,18 @@ public class Mastermind extends Games{
 
 		createComputerTable();
 
+		printTab(secretComputerTable);
+
 		for (int turn = 0; turn < finalTurn; turn++) {
 			System.out.println("Votre combinaison : ");
-			response = secretTableCheck(answerHumanTable());
+			response = secretComputerTableCheck(createAnswerHumanTable());
 			System.out.println(response);
-			if (Arrays.equals(answerTable, secretTable)) {
+			if (Arrays.equals(answerHumanTable, secretComputerTable)) {
 				System.out.println("Bravo ! Vous avez trouvé la solution en " + (turn + 1) + " tours !");
 				break;
 			}
 		}
-		return 4;
+		return 1;
 	}
 
 	@Override
@@ -42,21 +43,21 @@ public class Mastermind extends Games{
 		createHumanTable();
 
 		for (int turn = 0; turn < finalTurn; turn++) {
-			if (turn == 0)
+			if (turn == 0) {
 				firstDefaultComputerResponse();
-			else
+			} else
 				computerAlgo(response);
-			
-			//printTab(secretTable);
-			response = secretTableCheck(answerComputerTable);
+
+			System.out.println("Combinaison de l'ordinateur :");
 			printTab(answerComputerTable);
-			System.out.println(response);
-			if (Arrays.equals(answerComputerTable, secretTable)) {
+			response = secretHumanTableCheck(answerComputerTable);
+
+			if (Arrays.equals(answerComputerTable, secretHumanTable)) {
 				System.out.println("L'ordinateur a trouvé la solution en " + (turn + 1) + " tours !");
 				break;
 			}
 		}
-		return 5;
+		return 2;
 	}
 
 	@Override
@@ -64,44 +65,87 @@ public class Mastermind extends Games{
 		String response = null;
 		String computerResponse = null;
 		createComputerTable();
+		createHumanTable();
 
 		for (int turn = 0; turn < finalTurn; turn++) {
 			if (turn % 2 == 0) {
 				System.out.println("Votre combinaison : ");
-				response = secretTableCheck(answerHumanTable());
+				response = secretComputerTableCheck(createAnswerHumanTable());
 				System.out.println(response);
-				if (Arrays.equals(answerTable, secretTable)) {
-					System.out.println("Bravo ! Vous avez battu l'ordinateur en " + (turn/2 + 1) + " tours !");
+				if (Arrays.equals(answerHumanTable, secretComputerTable)) {
+					System.out.println("Bravo ! Vous avez battu l'ordinateur en " + (turn / 2 + 1) + " tours !");
 					break;
 				}
 			} else {
-				//System.out.println("Combinaison de l'ordinateur : ");
+				System.out.println("Combinaison de l'ordinateur : ");
 				if (turn == 1)
 					firstDefaultComputerResponse();
 				else
 					computerAlgo(computerResponse);
-				computerResponse = secretTableCheck(computerAlgo(computerResponse));
-				//printTab(answerComputerTable);
-				//System.out.println(computerResponse);
-				if (Arrays.equals(answerComputerTable, secretTable)) {
-					System.out.println("Perdu ! L'ordinateur vous a battu en " + (turn/2 + 1) + " tours !");
+
+				System.out.println("Combinaison de l'ordinateur :");
+				printTab(answerComputerTable);
+				computerResponse = secretHumanTableCheck(answerComputerTable);
+				if (Arrays.equals(answerComputerTable, secretHumanTable)) {
+					System.out.println("Perdu ! L'ordinateur vous a battu en " + (turn / 2 + 1) + " tours !");
 					break;
 				}
 			}
 		}
-		return 6;
-	}
-
-	@Override
-	protected String secretTableCheck(int[] tab) {
-		// TODO Auto-generated method stub
-		return null;
+		return 3;
 	}
 
 	@Override
 	protected int[] computerAlgo(String s) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected String secretComputerTableCheck(int[] tab) {
+		String ret = "";
+		int goodLocated = 0;
+		int badlyLocated = 0;
+
+		for (int i = 0; i < secretComputerTable.length; i++) {
+			if (secretComputerTable[i] == tab[i])
+				goodLocated++;
+			else {
+				int j = 0;
+				for (int k = 0; k < secretComputerTable.length; k++) {
+					if (secretComputerTable[j] == tab[k])
+						badlyLocated++;
+				}
+			}
+		}
+
+		/*
+		 * for (int j = 0; j < secretComputerTable.length; j++) { if
+		 * (secretComputerTable[j] != tab[j]) { for (int k = 0; k <
+		 * secretComputerTable.length; k++) { if (secretComputerTable[j] == tab[k])
+		 * badlyLocated++; } } }
+		 */
+
+		ret = "Chiffre(s) bien placé(s) " + goodLocated + ", chiffre(s) mal placé(s) " + badlyLocated;
+		return ret;
+
+	}
+
+	@Override
+	protected String secretHumanTableCheck(int[] tab) {
+		String ret = "";
+		int goodLocated = 0;
+		int badlyLocated = 0;
+		sc = new Scanner(System.in);
+
+		System.out.println("Chiffre(s) bien placé(s) :");
+		goodLocated = sc.nextInt();
+
+		System.out.println("Chiffre(s) bon(s) mais mal placé(s)");
+		badlyLocated = sc.nextInt();
+
+		ret = "Chiffre(s) bien placé(s) " + goodLocated + ", chiffre(s) mal placé(s) " + badlyLocated;
+		return ret;
 	}
 
 }

@@ -12,7 +12,8 @@ public class StrategyGamesGetPropertyValues {
 	private InputStream inputStream;
 	private String size;
 	private String finalTurn;
-	private String color;
+	private String minNumber;
+	private String maxNumber;
 
 	public String getPropValues() throws IOException {
 
@@ -33,9 +34,10 @@ public class StrategyGamesGetPropertyValues {
 			// get the property value and print it out
 			size = prop.getProperty("size");
 			finalTurn = prop.getProperty("finalTurn");
-			color = prop.getProperty("couleur");
+			minNumber = prop.getProperty("minNumber");
+			maxNumber = prop.getProperty("maxNumber");
 
-			result = "Propriété du jeu = " + size + " taille, " + finalTurn + " tours, " + color + " couleurs";
+			result = "Propriété du jeu = Réponse à " + size + " chiffres, limite en " + finalTurn + " tours, avec pour chiffre minimum " + minNumber + " et chiffre maximum " + maxNumber + ".";
 			System.out.println(result + "\nProgram Ran on " + time);
 		} catch (Exception e) {
 			System.out.println("Exception: " + e);
@@ -53,8 +55,12 @@ public class StrategyGamesGetPropertyValues {
 		return finalTurn;
 	}
 
-	public String getColor() {
-		return color;
+	public String getMinNumber() {
+		return minNumber;
+	}
+	
+	public String getMaxNumber() {
+		return maxNumber;
 	}
 
 }
