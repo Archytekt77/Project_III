@@ -1,5 +1,6 @@
 package strategyGames;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import config.StrategyGamesGetPropertyValues;
@@ -7,6 +8,7 @@ import config.StrategyGamesGetPropertyValues;
 public abstract class Games {
 
 	public Scanner sc = new Scanner(System.in);
+	protected boolean developerMode = false;
 	protected StrategyGamesGetPropertyValues prop;
 	protected int size;
 	protected int finalTurn;
@@ -30,17 +32,30 @@ public abstract class Games {
 		sc = new Scanner(System.in);
 	}
 
-	abstract protected int challengerMode();
-
-	abstract protected int defenderMode();
-
-	abstract protected int duelMode();
-
 	abstract protected int[] computerAlgo(String s);
 
 	abstract protected String secretComputerTableCheck(int tab[]);
 
 	abstract protected String secretHumanTableCheck(int tab[]);
+
+	public boolean selectDeveloperMode() {
+		int select = 0;
+		try {
+			System.out.println("Voulez vous lancer en mode développeur : 1. Oui ou 2. Non");
+			select = sc.nextInt();
+
+			if (select == 1)
+				return developerMode = true;
+			else if (select == 2)
+				return developerMode = false;
+			else {
+				sc = new Scanner(System.in);
+				throw new InputMismatchException();
+			}
+		} catch (InputMismatchException e) {
+			return selectDeveloperMode();
+		}
+	}
 
 	public int selectGameMode() {
 		int ret = 0;
@@ -75,11 +90,94 @@ public abstract class Games {
 			return duelMode();
 	}
 
+	protected int challengerMode() {
+		String response = null;
+
+		//createComputerTable();
+		secretComputerTable = new int[] {1,2,2,2};
+
+		if (developerMode == true)
+			printTab(secretComputerTable);
+
+		for (int turn = 0; turn < finalTurn; turn++) {
+			System.out.println("Tour " + (turn + 1) + "/" + finalTurn + ". Votre combinaison : ");
+			response = secretComputerTableCheck(createAnswerHumanTable());
+			System.out.println(response);
+			if (Arrays.equals(answerHumanTable, secretComputerTable)) {
+				System.out.println("Bravo ! Vous avez trouvé la solution en " + (turn + 1) + " tours !");
+				break;
+			}
+		}
+		return 1;
+	}
+
+	protected int defenderMode() {
+		String response = null;
+
+		createHumanTable();
+
+		for (int turn = 0; turn < finalTurn; turn++) {
+			if (turn == 0) {
+				firstDefaultComputerResponse();
+			} else
+				computerAlgo(response);
+
+			System.out.println("Combinaison de l'ordinateur :");
+			printTab(answerComputerTable);
+			response = secretHumanTableCheck(answerComputerTable);
+
+			if (Arrays.equals(answerComputerTable, secretHumanTable)) {
+				System.out.println("L'ordinateur a trouvé la solution en " + (turn + 1) + " tours !");
+				break;
+			}
+		}
+		return 2;
+	}
+
+	protected int duelMode() {
+		String response = null;
+		String computerResponse = null;
+		sc = new Scanner(System.in);
+		createComputerTable();
+		createHumanTable();
+		
+		if (developerMode == true)
+			printTab(secretComputerTable);
+
+		for (int turn = 0; turn < finalTurn; turn++) {
+			if (turn % 2 == 0) {
+				System.out.println("Tour " + (turn + 1) + "/" + finalTurn + ". Votre combinaison : ");
+				response = secretComputerTableCheck(createAnswerHumanTable());
+				System.out.println(response);
+				if (Arrays.equals(answerHumanTable, secretComputerTable)) {
+					System.out.println("Bravo ! Vous avez battu l'ordinateur en " + (turn / 2 + 1) + " tours !");
+					break;
+				}
+			} else {
+				System.out.println("Combinaison de l'ordinateur : ");
+				if (turn == 1)
+					firstDefaultComputerResponse();
+				else
+					computerAlgo(computerResponse);
+
+				printTab(answerComputerTable);
+				computerResponse = secretHumanTableCheck(answerComputerTable);
+				if (Arrays.equals(answerComputerTable, secretHumanTable)) {
+					System.out.print(
+							"Perdu ! L'ordinateur vous a battu en " + (turn / 2 + 1) + " tours ! La solution était : ");
+					printTab(secretComputerTable);
+					break;
+				}
+			}
+		}
+		return 3;
+	}
+
 	protected int[] createComputerTable() {
 		secretComputerTable = new int[size];
 
 		for (int i = 0; i < secretComputerTable.length; i++) {
-			secretComputerTable[i] = minNumber + (int) (Math.random() * ((maxNumber - minNumber)+ 1));
+			secretComputerTable[i] = minNumber + (int) (Math.random() * ((maxNumber - minNumber) + 1));
 		}
 		return secretComputerTable;
 	}
@@ -106,7 +204,7 @@ public abstract class Games {
 		answerComputerTable = new int[size];
 
 		for (int i = 0; i < size; i++) {
-			answerComputerTable[i] = 5;
+			answerComputerTable[i] = (minNumber + maxNumber)/2;
 		}
 		return answerComputerTable;
 	}

@@ -18,18 +18,21 @@ public class Main {
 		} catch (Exception e) {
 
 		}
-
+		
 		game = selectGame(properties);
+		
+		game.selectDeveloperMode();
 
 		restart(game.selectGameMode(), game);
 		sc.close();
 
 	}
-
+	
 	public static void restart(int gameSelect, Games game) {
 		int question = 0;
 
 		try {
+			System.out.println("");
 			System.out.println("1 : Rejouer; 2: autre jeu; 3: quitter");
 			question = sc.nextInt();
 
