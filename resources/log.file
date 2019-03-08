@@ -1,0 +1,8 @@
+2019-03-08 15:49:27 INFO  Main:68 - A quel jeu voulez vous jouer ? Recherche +/- (1) ou Mastermind (2).
+2019-03-08 15:49:31 INFO  Main:77 - Vous avez choisi le jeu "Mastermind".
+2019-03-08 15:49:31 INFO  Games:63 - Veuillez choisir le mode de jeu : Mode Challenger (1), Mode defenseur (2) ou Mode duel (3).
+2019-03-08 15:49:31 INFO  Games:70 - Vous avez choisi le mode Défenseur.
+2019-03-08 15:49:31 INFO  Games:260 - Veuillez taper votre combinaison secrète :
+2019-03-08 15:49:34 INFO  Games:270 - 
+2019-03-08 15:49:34 INFO  Games:132 - Combinaison de l'ordinateur : 
+2019-03-08 15:49:34 INFO  Games:402 - Chiffre(s) bien placé(s) :

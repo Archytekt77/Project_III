@@ -3,6 +3,8 @@ package strategyGames;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 import config.StrategyGamesGetPropertyValues;
 
 public class Main {
@@ -10,42 +12,43 @@ public class Main {
 	static Scanner sc = new Scanner(System.in);
 	static Games game = null;
 
+	private static Logger logger = Logger.getLogger(Main.class);
+
 	public static void main(String[] args) {
+
 		StrategyGamesGetPropertyValues properties = null;
+
 		try {
 			properties = new StrategyGamesGetPropertyValues();
 			properties.getPropValues();
 		} catch (Exception e) {
-
+			logger.error("Erreur de propriété");
 		}
-		
+
 		game = selectGame(properties);
-		
-		game.selectDeveloperMode();
 
 		restart(game.selectGameMode(), game);
 		sc.close();
 
 	}
-	
+
 	public static void restart(int gameSelect, Games game) {
 		int question = 0;
 
 		try {
-			System.out.println("");
-			System.out.println("1 : Rejouer; 2: autre jeu; 3: quitter");
+			logger.info("Veuillez choisir entre : Rejouer (1), Jouer à un autre jeu (2), ou quitter (3).");
 			question = sc.nextInt();
 
 			switch (question) {
 			case 1:
-				System.out.println("NOUVELLE PARTIE");
+				logger.info("NOUVELLE PARTIE");
 				restart(game.selectGameMode(gameSelect), game);
 				break;
 			case 2:
 				main(null);
 				break;
 			case 3:
-				System.out.println("Au revoir !");
+				logger.info("Au revoir !");
 				System.exit(0);
 			}
 			if (question != 1 || question != 2 || question != 3) {
@@ -53,6 +56,7 @@ public class Main {
 				throw new InputMismatchException();
 			}
 		} catch (InputMismatchException e) {
+			logger.error("Mauvaise sélection pour la sélection de fin de partie.");
 			restart(gameSelect, game);
 		}
 	}
@@ -61,18 +65,23 @@ public class Main {
 		int select = 0;
 
 		try {
-			System.out.println("1: Recherche +/-; 2: Mastermind");
+			logger.info("A quel jeu voulez vous jouer ? Recherche +/- (1) ou Mastermind (2).");
 			select = sc.nextInt();
 
-			if (select == 1)
+			if (select == 1) {
+				logger.info("Vous avez choisi le jeu \"Recherche +/-\".");
 				return new VariantMastermind(properties);
-			else if (select == 2)
+			}
+
+			else if (select == 2) {
+				logger.info("Vous avez choisi le jeu \"Mastermind\".");
 				return new Mastermind(properties);
-			else {
-				sc = new Scanner(System.in);
+			} else {
 				throw new InputMismatchException();
 			}
 		} catch (InputMismatchException e) {
+			logger.error("Mauvaise sélection pour le choix du jeu.");
+			sc = new Scanner(System.in);
 			return selectGame(properties);
 		}
 	}

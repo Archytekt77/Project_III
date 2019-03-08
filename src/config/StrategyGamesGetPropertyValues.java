@@ -12,8 +12,8 @@ public class StrategyGamesGetPropertyValues {
 	private InputStream inputStream;
 	private String size;
 	private String finalTurn;
-	private String minNumber;
 	private String maxNumber;
+	private String developerMode;
 
 	public String getPropValues() throws IOException {
 
@@ -34,10 +34,11 @@ public class StrategyGamesGetPropertyValues {
 			// get the property value and print it out
 			size = prop.getProperty("size");
 			finalTurn = prop.getProperty("finalTurn");
-			minNumber = prop.getProperty("minNumber");
 			maxNumber = prop.getProperty("maxNumber");
+			developerMode = prop.getProperty("developerMode");
 
-			result = "Propriété du jeu = Réponse à " + size + " chiffres, limite en " + finalTurn + " tours, avec pour chiffre minimum " + minNumber + " et chiffre maximum " + maxNumber + ".";
+			result = "Propriété du jeu = Réponse à " + size + " chiffres, limite en " + finalTurn + " tours, avec pour chiffre minimum 0 " + 
+					" et chiffre maximum " + maxNumber + ". Activation du mode développeur : " + developerMode + ".";
 			System.out.println(result + "\nProgram Ran on " + time);
 		} catch (Exception e) {
 			System.out.println("Exception: " + e);
@@ -54,13 +55,12 @@ public class StrategyGamesGetPropertyValues {
 	public String getFinalTurn() {
 		return finalTurn;
 	}
-
-	public String getMinNumber() {
-		return minNumber;
-	}
 	
 	public String getMaxNumber() {
 		return maxNumber;
 	}
 
+	public String getDeveloperMode() {
+		return developerMode;
+	}
 }

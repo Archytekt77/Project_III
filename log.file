@@ -1,0 +1,40 @@
+2019-03-08 21:30:22 INFO  Main:68 - A quel jeu voulez vous jouer ? Recherche +/- (1) ou Mastermind (2).
+2019-03-08 21:30:24 INFO  Main:77 - Vous avez choisi le jeu "Mastermind".
+2019-03-08 21:30:24 INFO  Games:63 - Veuillez choisir le mode de jeu : Mode Challenger (1), Mode defenseur (2) ou Mode duel (3).
+2019-03-08 21:30:26 INFO  Games:73 - Vous avez choisi le mode Duel.
+2019-03-08 21:30:26 INFO  Games:257 - Veuillez taper votre combinaison secrète :
+2019-03-08 21:30:28 INFO  Games:267 - Votre combinaison secrète est : 5555
+2019-03-08 21:30:28 INFO  Games:151 - Combinaison secrète : 0007
+2019-03-08 21:30:28 INFO  Games:155 - Tour 1/20. Votre combinaison : 
+2019-03-08 21:30:43 INFO  Games:157 - Chiffre(s) bien placé(s) 0, chiffre(s) mal placé(s) 0
+2019-03-08 21:30:43 INFO  Games:163 - Tour 1/20. (Combinaison secrète : 5555
+2019-03-08 21:30:43 INFO  Games:170 - Combinaison de l'ordinateur : 0000
+2019-03-08 21:30:43 INFO  Games:402 - Chiffre(s) bien placé(s) :
+2019-03-08 21:30:55 INFO  Games:405 - Chiffre(s) bon(s) mais mal placé(s)
+2019-03-08 21:30:56 INFO  Games:410 - Chiffre(s) bien placé(s) 0, chiffre(s) mal placé(s) 0
+2019-03-08 21:30:56 INFO  Games:151 - Combinaison secrète : 0007
+2019-03-08 21:30:56 INFO  Games:155 - Tour 2/20. Votre combinaison : 
+2019-03-08 21:31:03 INFO  Games:157 - Chiffre(s) bien placé(s) 0, chiffre(s) mal placé(s) 0
+2019-03-08 21:31:03 INFO  Games:163 - Tour 2/20. (Combinaison secrète : 5555
+2019-03-08 21:31:03 INFO  Games:170 - Combinaison de l'ordinateur : 1111
+2019-03-08 21:31:03 INFO  Games:402 - Chiffre(s) bien placé(s) :
+2019-03-08 21:31:08 INFO  Games:405 - Chiffre(s) bon(s) mais mal placé(s)
+2019-03-08 21:31:09 INFO  Games:410 - Chiffre(s) bien placé(s) 0, chiffre(s) mal placé(s) 0
+2019-03-08 21:31:09 INFO  Games:151 - Combinaison secrète : 0007
+2019-03-08 21:31:09 INFO  Games:155 - Tour 3/20. Votre combinaison : 
+2019-03-08 21:31:19 INFO  Games:157 - Chiffre(s) bien placé(s) 0, chiffre(s) mal placé(s) 0
+2019-03-08 21:31:19 INFO  Games:163 - Tour 3/20. (Combinaison secrète : 5555
+2019-03-08 21:31:20 INFO  Games:170 - Combinaison de l'ordinateur : 2222
+2019-03-08 21:31:20 INFO  Games:402 - Chiffre(s) bien placé(s) :
+2019-03-08 21:31:29 INFO  Games:405 - Chiffre(s) bon(s) mais mal placé(s)
+2019-03-08 21:31:30 INFO  Games:410 - Chiffre(s) bien placé(s) 0, chiffre(s) mal placé(s) 0
+2019-03-08 21:31:30 INFO  Games:151 - Combinaison secrète : 0007
+2019-03-08 21:31:30 INFO  Games:155 - Tour 4/20. Votre combinaison : 
+2019-03-08 21:31:34 INFO  Games:157 - Chiffre(s) bien placé(s) 0, chiffre(s) mal placé(s) 0
+2019-03-08 21:31:34 INFO  Games:163 - Tour 4/20. (Combinaison secrète : 5555
+2019-03-08 21:31:34 INFO  Games:170 - Combinaison de l'ordinateur : 3333
+2019-03-08 21:31:34 INFO  Games:402 - Chiffre(s) bien placé(s) :
+2019-03-08 21:31:36 INFO  Games:405 - Chiffre(s) bon(s) mais mal placé(s)
+2019-03-08 21:31:36 INFO  Games:410 - Chiffre(s) bien placé(s) 0, chiffre(s) mal placé(s) 0
+2019-03-08 21:31:36 INFO  Games:151 - Combinaison secrète : 0007
+2019-03-08 21:31:36 INFO  Games:155 - Tour 5/20. Votre combinaison : 
